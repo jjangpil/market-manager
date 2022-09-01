@@ -1,205 +1,205 @@
 <script>
-  import {
+import {
+  SimpleBar
+} from "simplebar-vue3";
+
+import i18n from "../i18n";
+
+/**
+ * Nav-bar Component
+ */
+export default {
+  data() {
+    return {
+      languages: [{
+        flag: require("@/assets/images/flags/us.svg"),
+        language: "en",
+        title: "English",
+      },
+        {
+          flag: require("@/assets/images/flags/french.svg"),
+          language: "fr",
+          title: "French",
+        },
+        {
+          flag: require("@/assets/images/flags/spain.svg"),
+          language: "sp",
+          title: "Spanish",
+        },
+        {
+          flag: require("@/assets/images/flags/china.svg"),
+          language: "ch",
+          title: "Chinese",
+        },
+        {
+          flag: require("@/assets/images/flags/germany.svg"),
+          language: "gr",
+          title: "Deutsche",
+        },
+        {
+          flag: require("@/assets/images/flags/russia.svg"),
+          language: "ru",
+          title: "русский",
+        },
+      ],
+      lan: i18n.locale,
+      text: null,
+      flag: null,
+      value: null,
+      myVar: 1,
+    };
+  },
+  components: {
     SimpleBar
-  } from "simplebar-vue3";
-
-  import i18n from "../i18n";
-
-  /**
-   * Nav-bar Component
-   */
-  export default {
-    data() {
-      return {
-        languages: [{
-            flag: require("@/assets/images/flags/us.svg"),
-            language: "en",
-            title: "English",
-          },
-          {
-            flag: require("@/assets/images/flags/french.svg"),
-            language: "fr",
-            title: "French",
-          },
-          {
-            flag: require("@/assets/images/flags/spain.svg"),
-            language: "sp",
-            title: "Spanish",
-          },
-          {
-            flag: require("@/assets/images/flags/china.svg"),
-            language: "ch",
-            title: "Chinese",
-          },
-          {
-            flag: require("@/assets/images/flags/germany.svg"),
-            language: "gr",
-            title: "Deutsche",
-          },
-          {
-            flag: require("@/assets/images/flags/russia.svg"),
-            language: "ru",
-            title: "русский",
-          },
-        ],
-        lan: i18n.locale,
-        text: null,
-        flag: null,
-        value: null,
-        myVar: 1,
-      };
-    },
-    components: {
-      SimpleBar
-    },
-    mounted() {
-      document.addEventListener("scroll", function () {
-        var pageTopbar = document.getElementById("page-topbar");
-        if (pageTopbar) {
-          document.body.scrollTop >= 50 || document.documentElement.scrollTop >= 50 ? pageTopbar.classList.add(
+  },
+  mounted() {
+    document.addEventListener("scroll", function () {
+      var pageTopbar = document.getElementById("page-topbar");
+      if (pageTopbar) {
+        document.body.scrollTop >= 50 || document.documentElement.scrollTop >= 50 ? pageTopbar.classList.add(
             "topbar-shadow") : pageTopbar.classList.remove("topbar-shadow");
-        }
-      });
-      if (document.getElementById("topnav-hamburger-icon"))
-        document
-        .getElementById("topnav-hamburger-icon")
-        .addEventListener("click", this.toggleHamburgerMenu);
+      }
+    });
+    if (document.getElementById("topnav-hamburger-icon"))
+      document
+          .getElementById("topnav-hamburger-icon")
+          .addEventListener("click", this.toggleHamburgerMenu);
 
-      this.isCustomDropdown();
-    },
-    methods: {
-      isCustomDropdown() {
-        //Search bar
-        var searchOptions = document.getElementById("search-close-options");
-        var dropdown = document.getElementById("search-dropdown");
-        var searchInput = document.getElementById("search-options");
+    this.isCustomDropdown();
+  },
+  methods: {
+    isCustomDropdown() {
+      //Search bar
+      var searchOptions = document.getElementById("search-close-options");
+      var dropdown = document.getElementById("search-dropdown");
+      var searchInput = document.getElementById("search-options");
 
-        searchInput.addEventListener("focus", () => {
-          var inputLength = searchInput.value.length;
-          if (inputLength > 0) {
-            dropdown.classList.add("show");
-            searchOptions.classList.remove("d-none");
-          } else {
-            dropdown.classList.remove("show");
-            searchOptions.classList.add("d-none");
-          }
-        });
-
-        searchInput.addEventListener("keyup", () => {
-          var inputLength = searchInput.value.length;
-          if (inputLength > 0) {
-            dropdown.classList.add("show");
-            searchOptions.classList.remove("d-none");
-          } else {
-            dropdown.classList.remove("show");
-            searchOptions.classList.add("d-none");
-          }
-        });
-
-        searchOptions.addEventListener("click", () => {
-          searchInput.value = "";
+      searchInput.addEventListener("focus", () => {
+        var inputLength = searchInput.value.length;
+        if (inputLength > 0) {
+          dropdown.classList.add("show");
+          searchOptions.classList.remove("d-none");
+        } else {
           dropdown.classList.remove("show");
           searchOptions.classList.add("d-none");
-        });
+        }
+      });
 
-        document.body.addEventListener("click", (e) => {
-          if (e.target.getAttribute("id") !== "search-options") {
-            dropdown.classList.remove("show");
-            searchOptions.classList.add("d-none");
-          }
-        });
-      },
-      toggleHamburgerMenu() {
-        var windowSize = document.documentElement.clientWidth;
+      searchInput.addEventListener("keyup", () => {
+        var inputLength = searchInput.value.length;
+        if (inputLength > 0) {
+          dropdown.classList.add("show");
+          searchOptions.classList.remove("d-none");
+        } else {
+          dropdown.classList.remove("show");
+          searchOptions.classList.add("d-none");
+        }
+      });
 
-        if (windowSize > 767)
-          document.querySelector(".hamburger-icon").classList.toggle("open");
+      searchOptions.addEventListener("click", () => {
+        searchInput.value = "";
+        dropdown.classList.remove("show");
+        searchOptions.classList.add("d-none");
+      });
 
-        //For collapse horizontal menu
-        if (
+      document.body.addEventListener("click", (e) => {
+        if (e.target.getAttribute("id") !== "search-options") {
+          dropdown.classList.remove("show");
+          searchOptions.classList.add("d-none");
+        }
+      });
+    },
+    toggleHamburgerMenu() {
+      var windowSize = document.documentElement.clientWidth;
+
+      if (windowSize > 767)
+        document.querySelector(".hamburger-icon").classList.toggle("open");
+
+      //For collapse horizontal menu
+      if (
           document.documentElement.getAttribute("data-layout") === "horizontal"
-        ) {
-          document.body.classList.contains("menu") ?
+      ) {
+        document.body.classList.contains("menu") ?
             document.body.classList.remove("menu") :
             document.body.classList.add("menu");
-        }
+      }
 
-        //For collapse vertical menu
-        if (document.documentElement.getAttribute("data-layout") === "vertical") {
-          if (windowSize < 1025 && windowSize > 767) {
-            document.body.classList.remove("vertical-sidebar-enable");
-            document.documentElement.getAttribute("data-sidebar-size") == "sm" ?
+      //For collapse vertical menu
+      if (document.documentElement.getAttribute("data-layout") === "vertical") {
+        if (windowSize < 1025 && windowSize > 767) {
+          document.body.classList.remove("vertical-sidebar-enable");
+          document.documentElement.getAttribute("data-sidebar-size") == "sm" ?
               document.documentElement.setAttribute("data-sidebar-size", "") :
               document.documentElement.setAttribute("data-sidebar-size", "sm");
-          } else if (windowSize > 1025) {
-            document.body.classList.remove("vertical-sidebar-enable");
-            document.documentElement.getAttribute("data-sidebar-size") == "lg" ?
+        } else if (windowSize > 1025) {
+          document.body.classList.remove("vertical-sidebar-enable");
+          document.documentElement.getAttribute("data-sidebar-size") == "lg" ?
               document.documentElement.setAttribute("data-sidebar-size", "sm") :
               document.documentElement.setAttribute("data-sidebar-size", "lg");
-          } else if (windowSize <= 767) {
-            document.body.classList.add("vertical-sidebar-enable");
-            document.documentElement.setAttribute("data-sidebar-size", "lg");
-          }
+        } else if (windowSize <= 767) {
+          document.body.classList.add("vertical-sidebar-enable");
+          document.documentElement.setAttribute("data-sidebar-size", "lg");
         }
+      }
 
-        //Two column menu
-        if (document.documentElement.getAttribute("data-layout") == "twocolumn") {
-          document.body.classList.contains("twocolumn-panel") ?
+      //Two column menu
+      if (document.documentElement.getAttribute("data-layout") == "twocolumn") {
+        document.body.classList.contains("twocolumn-panel") ?
             document.body.classList.remove("twocolumn-panel") :
             document.body.classList.add("twocolumn-panel");
-        }
-      },
-      toggleMenu() {
-        this.$parent.toggleMenu();
-      },
-      toggleRightSidebar() {
-        this.$parent.toggleRightSidebar();
-      },
-      initFullScreen() {
-        document.body.classList.toggle("fullscreen-enable");
-        if (
+      }
+    },
+    toggleMenu() {
+      this.$parent.toggleMenu();
+    },
+    toggleRightSidebar() {
+      this.$parent.toggleRightSidebar();
+    },
+    initFullScreen() {
+      document.body.classList.toggle("fullscreen-enable");
+      if (
           !document.fullscreenElement &&
           /* alternative standard method */
           !document.mozFullScreenElement &&
           !document.webkitFullscreenElement
-        ) {
-          // current working methods
-          if (document.documentElement.requestFullscreen) {
-            document.documentElement.requestFullscreen();
-          } else if (document.documentElement.mozRequestFullScreen) {
-            document.documentElement.mozRequestFullScreen();
-          } else if (document.documentElement.webkitRequestFullscreen) {
-            document.documentElement.webkitRequestFullscreen(
+      ) {
+        // current working methods
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
+          document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) {
+          document.documentElement.webkitRequestFullscreen(
               Element.ALLOW_KEYBOARD_INPUT
-            );
-          }
-        } else {
-          if (document.cancelFullScreen) {
-            document.cancelFullScreen();
-          } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-          } else if (document.webkitCancelFullScreen) {
-            document.webkitCancelFullScreen();
-          }
+          );
         }
-      },
-      setLanguage(locale, country, flag) {
-        this.lan = locale;
-        this.text = country;
-        this.flag = flag;
-        document.getElementById("header-lang-img").setAttribute("src", flag);
-        i18n.global.locale = locale;
-      },
-      toggleDarkMode() {
-        if (document.documentElement.getAttribute("data-layout-mode") == "dark") {
-          document.documentElement.setAttribute("data-layout-mode", "light");
-        } else {
-          document.documentElement.setAttribute("data-layout-mode", "dark");
+      } else {
+        if (document.cancelFullScreen) {
+          document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen();
         }
-      },
+      }
     },
-    computed: {},
-  };
+    setLanguage(locale, country, flag) {
+      this.lan = locale;
+      this.text = country;
+      this.flag = flag;
+      document.getElementById("header-lang-img").setAttribute("src", flag);
+      i18n.global.locale = locale;
+    },
+    toggleDarkMode() {
+      if (document.documentElement.getAttribute("data-layout-mode") == "dark") {
+        document.documentElement.setAttribute("data-layout-mode", "light");
+      } else {
+        document.documentElement.setAttribute("data-layout-mode", "dark");
+      }
+    },
+  },
+  computed: {},
+};
 </script>
 
 <template>
@@ -211,16 +211,16 @@
           <div class="navbar-brand-box horizontal-logo">
             <router-link to="/" class="logo logo-dark">
               <span class="logo-sm">
-                <img src="@/assets/images/logo-sm.png" alt="" height="22" />
+                <img src="@/assets/images/logo-sm.png" alt="" height="22"/>
               </span>
               <span class="logo-lg">
-                <img src="@/assets/images/logo-dark.png" alt="" height="17" />
+                <img src="@/assets/images/logo-dark.png" alt="" height="17"/>
               </span>
             </router-link>
 
             <router-link to="/" class="logo logo-light">
               <span class="logo-sm">
-                <img src="@/assets/images/logo-sm.png" alt="" height="22" />
+                <img src="@/assets/images/logo-sm.png" alt="" height="22"/>
               </span>
               <span class="logo-lg">
                 <img src="@/assets/images/logo-light.png" alt="" height="17" />
@@ -229,7 +229,7 @@
           </div>
 
           <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger shadow-none"
-            id="topnav-hamburger-icon">
+                  id="topnav-hamburger-icon">
             <span class="hamburger-icon">
               <span></span>
               <span></span>
@@ -241,7 +241,7 @@
           <form class="app-search d-none d-md-block">
             <div class="position-relative">
               <input type="text" class="form-control" placeholder="Search..." autocomplete="off" id="search-options"
-                value="" />
+                     value=""/>
               <span class="mdi mdi-magnify search-widget-icon"></span>
               <span class="
                   mdi mdi-close-circle
@@ -312,7 +312,7 @@
                   <!-- item -->
                   <a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2">
                     <img src="@/assets/images/users/avatar-2.jpg" class="me-3 rounded-circle avatar-xs"
-                      alt="user-pic" />
+                         alt="user-pic"/>
                     <div class="flex-1">
                       <h6 class="m-0">Angela Bernier</h6>
                       <span class="fs-11 mb-0 text-muted">Manager</span>
@@ -321,7 +321,7 @@
                   <!-- item -->
                   <a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2">
                     <img src="@/assets/images/users/avatar-3.jpg" class="me-3 rounded-circle avatar-xs"
-                      alt="user-pic" />
+                         alt="user-pic"/>
                     <div class="flex-1">
                       <h6 class="m-0">David Grasso</h6>
                       <span class="fs-11 mb-0 text-muted">Web Designer</span>
@@ -330,7 +330,7 @@
                   <!-- item -->
                   <a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2">
                     <img src="@/assets/images/users/avatar-5.jpg" class="me-3 rounded-circle avatar-xs"
-                      alt="user-pic" />
+                         alt="user-pic"/>
                     <div class="flex-1">
                       <h6 class="m-0">Mike Bunch</h6>
                       <span class="fs-11 mb-0 text-muted">React Developer</span>
@@ -350,16 +350,17 @@
         <div class="d-flex align-items-center">
           <div class="dropdown d-md-none topbar-head-dropdown header-item">
             <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle shadow-none"
-              id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
               <i class="bx bx-search fs-22"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-              aria-labelledby="page-header-search-dropdown">
+                 aria-labelledby="page-header-search-dropdown">
               <form class="p-3">
                 <div class="form-group m-0">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search ..."
-                      aria-label="Recipient's username" />
+                           aria-label="Recipient's username"/>
                     <button class="btn btn-primary" type="submit">
                       <i class="mdi mdi-magnify"></i>
                     </button>
@@ -371,17 +372,17 @@
 
           <div class="dropdown ms-1 topbar-head-dropdown header-item">
             <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle shadow-none"
-              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img id="header-lang-img" src="@/assets/images/flags/us.svg" alt="Header Language" height="20"
-                class="rounded" />
+                   class="rounded"/>
             </button>
             <div class="dropdown-menu dropdown-menu-end">
               <!-- item-->
               <a href="javascript:void(0);" v-for="(entry, i) in languages" :key="`Lang${i}`" :value="entry"
-                @click="setLanguage(entry.language, entry.title, entry.flag)"
-                :class="{ active: lan === entry.language }" class="dropdown-item notify-item language py-2"
-                data-lang="en" title="English">
-                <img :src="entry.flag" alt="user-image" class="me-2 rounded" height="18" />
+                 @click="setLanguage(entry.language, entry.title, entry.flag)"
+                 :class="{ active: lan === entry.language }" class="dropdown-item notify-item language py-2"
+                 data-lang="en" title="English">
+                <img :src="entry.flag" alt="user-image" class="me-2 rounded" height="18"/>
                 <span class="align-middle">{{ entry.title }}</span>
               </a>
             </div>
@@ -389,7 +390,7 @@
 
           <div class="dropdown topbar-head-dropdown ms-1 header-item">
             <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle shadow-none"
-              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="bx bx-category-alt fs-22"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-lg p-0 dropdown-menu-end">
@@ -413,19 +414,19 @@
                 <div class="row g-0">
                   <div class="col">
                     <a class="dropdown-icon-item" href="#!">
-                      <img src="@/assets/images/brands/github.png" alt="Github" />
+                      <img src="@/assets/images/brands/github.png" alt="Github"/>
                       <span>GitHub</span>
                     </a>
                   </div>
                   <div class="col">
                     <a class="dropdown-icon-item" href="#!">
-                      <img src="@/assets/images/brands/bitbucket.png" alt="bitbucket" />
+                      <img src="@/assets/images/brands/bitbucket.png" alt="bitbucket"/>
                       <span>Bitbucket</span>
                     </a>
                   </div>
                   <div class="col">
                     <a class="dropdown-icon-item" href="#!">
-                      <img src="@/assets/images/brands/dribbble.png" alt="dribbble" />
+                      <img src="@/assets/images/brands/dribbble.png" alt="dribbble"/>
                       <span>Dribbble</span>
                     </a>
                   </div>
@@ -434,19 +435,19 @@
                 <div class="row g-0">
                   <div class="col">
                     <a class="dropdown-icon-item" href="#!">
-                      <img src="@/assets/images/brands/dropbox.png" alt="dropbox" />
+                      <img src="@/assets/images/brands/dropbox.png" alt="dropbox"/>
                       <span>Dropbox</span>
                     </a>
                   </div>
                   <div class="col">
                     <a class="dropdown-icon-item" href="#!">
-                      <img src="@/assets/images/brands/mail_chimp.png" alt="mail_chimp" />
+                      <img src="@/assets/images/brands/mail_chimp.png" alt="mail_chimp"/>
                       <span>Mail Chimp</span>
                     </a>
                   </div>
                   <div class="col">
                     <a class="dropdown-icon-item" href="#!">
-                      <img src="@/assets/images/brands/slack.png" alt="slack" />
+                      <img src="@/assets/images/brands/slack.png" alt="slack"/>
                       <span>Slack</span>
                     </a>
                   </div>
@@ -457,7 +458,7 @@
 
           <div class="dropdown topbar-head-dropdown ms-1 header-item">
             <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle shadow-none"
-              id="page-header-cart-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    id="page-header-cart-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="bx bx-shopping-bag fs-22"></i>
               <span class="
                   position-absolute
@@ -470,7 +471,7 @@
                 ">7<span class="visually-hidden">unread messages</span></span>
             </button>
             <div class="dropdown-menu dropdown-menu-xl dropdown-menu-end p-0"
-              aria-labelledby="page-header-cart-dropdown">
+                 aria-labelledby="page-header-cart-dropdown">
               <div class="
                   p-3
                   border-top-0 border-start-0 border-end-0 border-dashed border
@@ -489,7 +490,7 @@
                   <div class="d-block dropdown-item text-wrap px-3 py-2">
                     <div class="d-flex align-items-center">
                       <img src="@/assets/images/products/img-1.png" class="me-3 rounded-circle avatar-sm p-2 bg-light"
-                        alt="user-pic" />
+                           alt="user-pic"/>
                       <div class="flex-1">
                         <h6 class="mt-0 mb-1 fs-14">
                           <router-link to="/ecommerce/product-details" class="text-reset">Branded T-Shirts</router-link>
@@ -512,7 +513,7 @@
                   <div class="d-block dropdown-item text-wrap px-3 py-2">
                     <div class="d-flex align-items-center">
                       <img src="@/assets/images/products/img-2.png" class="me-3 rounded-circle avatar-sm p-2 bg-light"
-                        alt="user-pic" />
+                           alt="user-pic"/>
                       <div class="flex-1">
                         <h6 class="mt-0 mb-1 fs-14">
                           <router-link to="/ecommerce/product-details" class="text-reset">Bentwood Chair</router-link>
@@ -535,11 +536,12 @@
                   <div class="d-block dropdown-item text-wrap px-3 py-2">
                     <div class="d-flex align-items-center">
                       <img src="@/assets/images/products/img-3.png" class="me-3 rounded-circle avatar-sm p-2 bg-light"
-                        alt="user-pic" />
+                           alt="user-pic"/>
                       <div class="flex-1">
                         <h6 class="mt-0 mb-1 fs-14">
                           <router-link to="/ecommerce/product-details" class="text-reset">
-                            Borosil Paper Cup</router-link>
+                            Borosil Paper Cup
+                          </router-link>
                         </h6>
                         <p class="mb-0 fs-12 text-muted">
                           Quantity: <span>3 x $250</span>
@@ -559,7 +561,7 @@
                   <div class="d-block dropdown-item text-wrap px-3 py-2">
                     <div class="d-flex align-items-center">
                       <img src="@/assets/images/products/img-6.png" class="me-3 rounded-circle avatar-sm p-2 bg-light"
-                        alt="user-pic" />
+                           alt="user-pic"/>
                       <div class="flex-1">
                         <h6 class="mt-0 mb-1 fs-14">
                           <router-link to="/ecommerce/product-details" class="text-reset">Gray Styled T-Shirt
@@ -583,7 +585,7 @@
                   <div class="d-block dropdown-item text-wrap px-3 py-2">
                     <div class="d-flex align-items-center">
                       <img src="@/assets/images/products/img-5.png" class="me-3 rounded-circle avatar-sm p-2 bg-light"
-                        alt="user-pic" />
+                           alt="user-pic"/>
                       <div class="flex-1">
                         <h6 class="mt-0 mb-1 fs-14">
                           <router-link to="/ecommerce/product-details" class="text-reset">Stillbird Helmet</router-link>
@@ -629,7 +631,7 @@
 
           <div class="ms-1 header-item d-none d-sm-flex">
             <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle shadow-none"
-              data-toggle="fullscreen" @click="initFullScreen">
+                    data-toggle="fullscreen" @click="initFullScreen">
               <i class="bx bx-fullscreen fs-22"></i>
             </button>
           </div>
@@ -647,14 +649,14 @@
 
           <div class="dropdown topbar-head-dropdown ms-1 header-item">
             <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle shadow-none"
-              id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
+                    id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
               <i class="bx bx-bell fs-22"></i>
               <span class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">
                 3<span class="visually-hidden">unread messages</span></span>
             </button>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-              aria-labelledby="page-header-notifications-dropdown">
+                 aria-labelledby="page-header-notifications-dropdown">
               <div class="dropdown-head bg-primary bg-pattern rounded-top">
                 <div class="p-3">
                   <div class="row align-items-center">
@@ -671,10 +673,10 @@
 
                 <div class="px-2 pt-2">
                   <ul class="nav nav-tabs dropdown-tabs nav-tabs-custom" data-dropdown-tabs="true"
-                    id="notificationItemsTab" role="tablist" auto-close="outside" @click.capture.stop>
+                      id="notificationItemsTab" role="tablist" auto-close="outside" @click.capture.stop>
                     <li class="nav-item">
                       <a class="nav-link active" data-bs-toggle="tab" href="#all-noti-tab" role="tab"
-                        aria-selected="true">
+                         aria-selected="true">
                         All (4)
                       </a>
                     </li>
@@ -733,7 +735,7 @@
                           </p>
                         </div>
                         <div class="px-2 fs-15">
-                          <input class="form-check-input" type="checkbox" />
+                          <input class="form-check-input" type="checkbox"/>
                         </div>
                       </div>
                     </div>
@@ -747,7 +749,7 @@
                       ">
                       <div class="d-flex">
                         <img src="@/assets/images/users/avatar-2.jpg" class="me-3 rounded-circle avatar-xs"
-                          alt="user-pic" />
+                             alt="user-pic"/>
                         <div class="flex-1">
                           <a href="#!" class="stretched-link">
                             <h6 class="mt-0 mb-1 fs-13 fw-semibold">
@@ -771,7 +773,7 @@
                           </p>
                         </div>
                         <div class="px-2 fs-15">
-                          <input class="form-check-input" type="checkbox" />
+                          <input class="form-check-input" type="checkbox"/>
                         </div>
                       </div>
                     </div>
@@ -814,7 +816,7 @@
                           </p>
                         </div>
                         <div class="px-2 fs-15">
-                          <input class="form-check-input" type="checkbox" />
+                          <input class="form-check-input" type="checkbox"/>
                         </div>
                       </div>
                     </div>
@@ -828,7 +830,7 @@
                       ">
                       <div class="d-flex">
                         <img src="@/assets/images/users/avatar-8.jpg" class="me-3 rounded-circle avatar-xs"
-                          alt="user-pic" />
+                             alt="user-pic"/>
                         <div class="flex-1">
                           <a href="#!" class="stretched-link">
                             <h6 class="mt-0 mb-1 fs-13 fw-semibold">
@@ -851,7 +853,7 @@
                           </p>
                         </div>
                         <div class="px-2 fs-15">
-                          <input class="form-check-input" type="checkbox" />
+                          <input class="form-check-input" type="checkbox"/>
                         </div>
                       </div>
                     </div>
@@ -870,7 +872,7 @@
                     <div class="text-reset notification-item d-block dropdown-item">
                       <div class="d-flex">
                         <img src="@/assets/images/users/avatar-3.jpg" class="me-3 rounded-circle avatar-xs"
-                          alt="user-pic" />
+                             alt="user-pic"/>
                         <div class="flex-1">
                           <a href="#!" class="stretched-link">
                             <h6 class="mt-0 mb-1 fs-13 fw-semibold">
@@ -893,7 +895,7 @@
                           </p>
                         </div>
                         <div class="px-2 fs-15">
-                          <input class="form-check-input" type="checkbox" />
+                          <input class="form-check-input" type="checkbox"/>
                         </div>
                       </div>
                     </div>
@@ -901,7 +903,7 @@
                     <div class="text-reset notification-item d-block dropdown-item">
                       <div class="d-flex">
                         <img src="@/assets/images/users/avatar-2.jpg" class="me-3 rounded-circle avatar-xs"
-                          alt="user-pic" />
+                             alt="user-pic"/>
                         <div class="flex-1">
                           <a href="#!" class="stretched-link">
                             <h6 class="mt-0 mb-1 fs-13 fw-semibold">
@@ -925,7 +927,7 @@
                           </p>
                         </div>
                         <div class="px-2 fs-15">
-                          <input class="form-check-input" type="checkbox" />
+                          <input class="form-check-input" type="checkbox"/>
                         </div>
                       </div>
                     </div>
@@ -933,7 +935,7 @@
                     <div class="text-reset notification-item d-block dropdown-item">
                       <div class="d-flex">
                         <img src="@/assets/images/users/avatar-6.jpg" class="me-3 rounded-circle avatar-xs"
-                          alt="user-pic" />
+                             alt="user-pic"/>
                         <div class="flex-1">
                           <a href="#!" class="stretched-link">
                             <h6 class="mt-0 mb-1 fs-13 fw-semibold">
@@ -957,7 +959,7 @@
                           </p>
                         </div>
                         <div class="px-2 fs-15">
-                          <input class="form-check-input" type="checkbox" />
+                          <input class="form-check-input" type="checkbox"/>
                         </div>
                       </div>
                     </div>
@@ -965,7 +967,7 @@
                     <div class="text-reset notification-item d-block dropdown-item">
                       <div class="d-flex">
                         <img src="@/assets/images/users/avatar-8.jpg" class="me-3 rounded-circle avatar-xs"
-                          alt="user-pic" />
+                             alt="user-pic"/>
                         <div class="flex-1">
                           <a href="#!" class="stretched-link">
                             <h6 class="mt-0 mb-1 fs-13 fw-semibold">
@@ -988,7 +990,7 @@
                           </p>
                         </div>
                         <div class="px-2 fs-15">
-                          <input class="form-check-input" type="checkbox" />
+                          <input class="form-check-input" type="checkbox"/>
                         </div>
                       </div>
                     </div>
@@ -1003,7 +1005,7 @@
                 </div>
                 <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel" aria-labelledby="alerts-tab">
                   <div class="w-25 w-sm-50 pt-3 mx-auto">
-                    <img src="@/assets/images/svg/bell.svg" class="img-fluid" alt="user-pic" />
+                    <img src="@/assets/images/svg/bell.svg" class="img-fluid" alt="user-pic"/>
                   </div>
                   <div class="text-center pb-5 mt-2">
                     <h6 class="fs-18 fw-semibold lh-base">
@@ -1017,10 +1019,10 @@
 
           <div class="dropdown ms-sm-3 header-item topbar-user">
             <button type="button" class="btn shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+                    aria-haspopup="true" aria-expanded="false">
               <span class="d-flex align-items-center">
                 <img class="rounded-circle header-profile-user" src="@/assets/images/users/avatar-1.jpg"
-                  alt="Header Avatar" />
+                     alt="Header Avatar"/>
                 <span class="text-start ms-xl-2">
                   <span class="
                       d-none d-xl-inline-block
@@ -1079,7 +1081,8 @@
               <router-link class="dropdown-item" to="/auth/lockscreen-basic"><i
                   class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i>
                 <span class="align-middle">Lock screen</span></router-link>
-              <a class="dropdown-item" href="/auth/logout-basic"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+              <a class="dropdown-item" href="/auth/logout-basic"><i
+                  class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
                 <span class="align-middle" data-key="t-logout">Logout</span></a>
             </div>
           </div>

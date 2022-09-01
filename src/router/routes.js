@@ -62,16 +62,8 @@ export default [
       title: "Dashboard",
       authRequired: true,
     },
-    component: () => import("../views/dashboard/ecommerce/index.vue"),
-  },
-  {
-    path: "/dashboard/crypto",
-    name: "dashboard-crypto",
-    meta: {
-      title: "Crypto",
-      authRequired: true,
-    },
-    component: () => import("../views/dashboard/crypto/index"),
+    component: () => import("../views/dashboard/product/index"),
+    //component: () => import("../views/dashboard/ecommerce/index.vue"),
   },
   {
     path: "/dashboard/projects",
@@ -82,20 +74,12 @@ export default [
     component: () => import("../views/dashboard/projects/index"),
   },
   {
-    path: "/dashboard/crm",
-    name: "dashboard-crm",
+    path: "/dashboard/product",
+    name: "dashboard-product",
     meta: {
-      title: "CRM", authRequired: true,
+        title: "Product", authRequired: true,
     },
-    component: () => import("../views/dashboard/crm/index"),
-  },
-  {
-    path: "/dashboard/analytics",
-    name: "dashboard-analytics",
-    meta: {
-      title: "Analytics", authRequired: true,
-    },
-    component: () => import("../views/dashboard/analytics/index"),
+    component: () => import("../views/dashboard/product/index"),
   },
   {
     path: "/logout",
